@@ -5,6 +5,8 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.highgui.HighGui;
 import org.opencv.imgproc.Imgproc;
 
+import java.util.Scanner;
+
 public class Main {
 
     static {
@@ -13,17 +15,32 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        String imagePath = "C:\\Users\\merve\\Downloads\\gorsel2.jpg";
+        // Kullanıcıdan resim dosyasının yolunu alma
+        System.out.println("Lütfen resim dosyasının yolunu giriniz:");
+        String imagePath = scanner.nextLine();
+
         Mat src = Imgcodecs.imread(imagePath);
-
         if (src.empty()) {
             System.out.println("Görsel yüklenemedi: " + imagePath);
             return;
         }
 
+        // Kullanıcıdan çözüm yolunu seçmesini isteme
+        System.out.println("Lütfen çözüm yolunu seçiniz (1 veya 2):");
+        int choice = scanner.nextInt();
         double contrastThreshold = 1.5;
-        Mat output = ImageProcessor.processImage(src, contrastThreshold);
+        Mat output;
+
+        if (choice == 1) {
+            output = Solution1.processImage(src, contrastThreshold);
+        } else if (choice == 2) {
+            output = Solution2.processImage(src, contrastThreshold);
+        } else {
+            System.out.println("Geçersiz seçim!");
+            return;
+        }
 
         Mat resizedOutput = new Mat();
         Size newSize = new Size(800, 600);
