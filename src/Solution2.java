@@ -3,8 +3,14 @@ import org.opencv.imgproc.Imgproc;
 
 import java.util.List;
 
-public class Solution2 {
-    public static Mat processImage(Mat src, double contrastThreshold) {
+public class Solution2 extends ImageProcessor {
+
+    public Solution2(double contrastThreshold) {
+        super(contrastThreshold);
+    }
+
+    @Override
+    public Mat processImage(Mat src) {
         Mat gray = new Mat();
         Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
 

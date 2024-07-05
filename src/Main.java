@@ -31,16 +31,18 @@ public class Main {
         System.out.println("Lütfen çözüm yolunu seçiniz (1 veya 2):");
         int choice = scanner.nextInt();
         double contrastThreshold = 1.5;
-        Mat output;
+        ImageProcessor processor;
 
         if (choice == 1) {
-            output = Solution1.processImage(src, contrastThreshold);
+            processor = new Solution1(contrastThreshold);
         } else if (choice == 2) {
-            output = Solution2.processImage(src, contrastThreshold);
+            processor = new Solution2(contrastThreshold);
         } else {
             System.out.println("Geçersiz seçim!");
             return;
         }
+
+        Mat output = processor.processImage(src);
 
         Mat resizedOutput = new Mat();
         Size newSize = new Size(800, 600);
