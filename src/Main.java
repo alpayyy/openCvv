@@ -15,13 +15,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner sınıfı, Java’nın java.util paketinde bulunur
+        Scanner scanner = new Scanner(System.in);//yazar
 
         // Kullanıcıdan resim dosyasının yolunu alma
         System.out.println("Lütfen resim dosyasının yolunu giriniz:");
-        String imagePath = scanner.nextLine();
+        String imagePath = scanner.nextLine();//okur
 
-        Mat src = Imgcodecs.imread(imagePath);
+        Mat src = Imgcodecs.imread(imagePath);//open cvnin metodu görsel dosyası yüklemek için kullanılır
         if (src.empty()) {
             System.out.println("Görsel yüklenemedi: " + imagePath);
             return;
@@ -29,8 +30,8 @@ public class Main {
 
         // Kullanıcıdan çözüm yolunu seçmesini isteme
         System.out.println("Lütfen çözüm yolunu seçiniz (1 veya 2):");
-        int choice = scanner.nextInt();
-        double contrastThreshold = 1.5;
+        int choice = scanner.nextInt();//integer değer okumayı sağlar
+        double contrastThreshold = 30.5;
         ImageProcessor processor;
 
         if (choice == 1) {
@@ -41,16 +42,18 @@ public class Main {
             System.out.println("Geçersiz seçim!");
             return;
         }
-
+      //src: Mat sınıfından bir nesne olup, işlenecek orijinal görseli temsil eder.
         Mat output = processor.processImage(src);
+        //output: processImage metodunun döndürdüğü işlenmiş görsel'dir. Bu görsel işleme sonuçlarını içerir.
 
         Mat resizedOutput = new Mat();
         Size newSize = new Size(800, 600);
-        Imgproc.resize(output, resizedOutput, newSize);
+        Imgproc.resize(output, resizedOutput, newSize);//Imgproc OpenCV’nin görseli yeniden boyutlandırma metodudur.
+        // resizedOutput Yeniden boyutlandırılmış görselin tutulacağı Mat nesnesidir.
 
         HighGui.imshow("Yazı ve Arka Plan Renkleri Çok Yakın Alanlar", resizedOutput);
         HighGui.waitKey();
-
+       // kaynakları serbest bırakma
         src.release();
         output.release();
         resizedOutput.release();

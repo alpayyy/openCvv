@@ -7,5 +7,6 @@
 	</lib>
 	<levels>
 		<level name="x64" value="project"/>
+		<level name="x641" value="project"/>
 	</levels>
 </component>

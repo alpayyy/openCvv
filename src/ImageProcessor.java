@@ -5,7 +5,7 @@ public abstract class ImageProcessor {
 
     public ImageProcessor(double contrastThreshold) {
         this.contrastThreshold = contrastThreshold;
-    }
+    }//constructor yapılandırıcı
 
     public abstract Mat processImage(Mat src);
 }
